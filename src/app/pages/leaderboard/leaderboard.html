@@ -1,0 +1,26 @@
+<div class="leaderboard-container">
+  <h2>Classement 🏆</h2>
+
+  <table class="leaderboard-table" *ngIf="scores.length > 0; else noScores">
+    <thead>
+      <tr>
+        <th>Joueur</th>
+        <th>Score</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of scores">
+        <td>{{ s.player }}</td>
+        <td>{{ s.points }}</td>
+        <td>{{ s.date | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noScores>
+    <p>Aucun score enregistré pour l’instant.</p>
+  </ng-template>
+
+  <button routerLink="/">Retour à l'accueil</button>
+</div>
