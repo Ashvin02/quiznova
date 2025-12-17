@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { ScoreService } from '../services/score';
+import { ScoreService } from '../services/score.service';
 
 export const scoreGuard: CanActivateFn = () => {
   const scoreService = inject(ScoreService);
