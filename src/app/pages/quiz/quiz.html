@@ -1,51 +1,63 @@
-<div class="quiz-container">
-  <!-- Bloc thème -->
-  <div class="theme-box fade-enter fade-enter-active" 
-  [@fadeTheme] 
-  [ngClass]="getThemeClass(questions[currentQuestionIndex]?.theme || 'default')">
-    <span class="theme-label">Thème :</span>
-    <span class="theme-name">{{ questions[currentQuestionIndex]?.theme }}</span>
+<div class="container my-4">
+
+  <!-- Thème -->
+  <div class="p-3 text-white rounded text-center mb-4"
+       [ngClass]="{
+         'bg-primary': getThemeClass(questions[currentQuestionIndex]?.theme) === 'general',
+         'bg-success': getThemeClass(questions[currentQuestionIndex]?.theme) === 'informatique',
+         'bg-warning': getThemeClass(questions[currentQuestionIndex]?.theme) === 'sport',
+         'bg-danger': getThemeClass(questions[currentQuestionIndex]?.theme) === 'mathématiques',
+         'bg-info': getThemeClass(questions[currentQuestionIndex]?.theme) === 'histoire',
+         'bg-dark': getThemeClass(questions[currentQuestionIndex]?.theme) === 'arts-culture',
+         'bg-secondary': getThemeClass(questions[currentQuestionIndex]?.theme) === 'default'
+       }">
+    <strong>Thème :</strong> {{ questions[currentQuestionIndex]?.theme }}
   </div>
-  
+
   <!-- Question -->
-  <h3 class="question-title">
+  <h3 class="mb-3">
     Question {{ currentQuestionIndex + 1 }} / {{ questions.length }}
   </h3>
-  <p class="question-text">{{ questions[currentQuestionIndex]?.text }}</p>
+
+  <p class="fs-5">{{ questions[currentQuestionIndex]?.text }}</p>
 
   <!-- Options -->
-  <div class="options">
-    <button *ngFor="let option of questions[currentQuestionIndex].options; let j = index"
-            [class.selected]="selectedOptionIndex === j"
-            [class.correct]="answerValidated === 'correct' && selectedOptionIndex === j"
-            [class.wrong]="answerValidated === 'wrong' && selectedOptionIndex === j"
-            (click)="selectAnswer(j)">
-      {{ option }}
-    </button>
-  </div>
-
-<!-- Bouton Valider affiché seulement si une réponse est choisie -->
-<button 
-  class="btn-validate" 
-  *ngIf="selectedOptionIndex !== null && !answerValidated" 
-  (click)="validateAnswer()">
-  Valider
-</button>
-
-  <!-- Timer & Score -->
-  <div class="timer-bar">
-    <div 
-      class="timer-progress" 
-      [style.width.%]="(timeLeft / totalTime) * 100"
-      [ngClass]="{
-        'timer-green': timeLeft > totalTime * 0.6,
-        'timer-orange': timeLeft <= totalTime * 0.6 && timeLeft > totalTime * 0.3,
-        'timer-red': timeLeft <= totalTime * 0.3
-      }">
+  <div class="row g-3 my-3">
+    <div class="col-12" *ngFor="let option of questions[currentQuestionIndex].options; let j = index">
+      <button class="btn w-100 text-start"
+              [ngClass]="{
+                'btn-outline-primary': selectedOptionIndex !== j,
+                'btn-dark': selectedOptionIndex === j && !answerValidated,
+                'btn-success': answerValidated === 'correct' && selectedOptionIndex === j,
+                'btn-danger': answerValidated === 'wrong' && selectedOptionIndex === j
+              }"
+              (click)="selectAnswer(j)">
+        {{ option }}
+      </button>
     </div>
   </div>
-  
-  <p>⏱ Temps restant : <strong>{{ timeLeft }}s</strong></p>  
-    <p>Score actuel : <strong>{{ score }}</strong></p>
+
+  <!-- Bouton valider -->
+  <button class="btn btn-primary mt-3"
+          *ngIf="selectedOptionIndex !== null && !answerValidated"
+          (click)="validateAnswer()">
+    Valider
+  </button>
+
+  <!-- Timer -->
+  <div class="progress my-4">
+    <div class="progress-bar"
+         role="progressbar"
+         [style.width.%]="(timeLeft / totalTime) * 100"
+         [ngClass]="{
+           'bg-success': timeLeft > totalTime * 0.6,
+           'bg-warning': timeLeft <= totalTime * 0.6 && timeLeft > totalTime * 0.3,
+           'bg-danger': timeLeft <= totalTime * 0.3
+         }">
+    </div>
   </div>
 
+  <p>⏱ Temps restant : <strong>{{ timeLeft }}s</strong></p>
+  <p>Score actuel : <strong>{{ score }}</strong></p>
+
+</div>

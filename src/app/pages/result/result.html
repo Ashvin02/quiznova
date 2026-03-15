@@ -1,15 +1,20 @@
-<div class="result-container">
+<div class="text-center mt-4">
+
   <h2>Résultats 🎯</h2>
   <p>Votre score final est : <strong>{{ score }}</strong></p>
 
-  <div class="save-score">
+  <div class="my-4">
     <p>Entrez votre nom pour enregistrer votre score :</p>
-    <input [(ngModel)]="playerName" placeholder="Votre nom" />
-    <button (click)="saveScore()">Enregistrer le score</button>
+
+    <div class="d-flex justify-content-center gap-2">
+      <input [(ngModel)]="playerName" class="form-control w-25" placeholder="Votre nom" />
+      <button class="btn btn-primary" (click)="saveScore()">Enregistrer</button>
+    </div>
   </div>
 
-  <div class="actions">
-    <button routerLink="/leaderboard">Voir le classement 🏆</button>
-    <button routerLink="/">Rejouer 🔄</button>
+  <div class="d-flex justify-content-center gap-3 mt-3">
+    <button class="btn btn-warning" routerLink="/leaderboard">Voir le classement 🏆</button>
+    <button class="btn btn-success" routerLink="/">Rejouer 🔄</button>
   </div>
+
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { QuizService } from '../../services/quiz';
 import { ScoreService } from '../../services/score.service';
@@ -11,7 +11,7 @@ import { trigger, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './quiz.html',
   styleUrls: ['./quiz.css'],
   animations: [
@@ -46,22 +46,22 @@ answerValidated: any;
     private cdr : ChangeDetectorRef
   ) {}
 
-  getThemeClass(theme: string): string {
-    switch (theme.toLowerCase()) {
+  getThemeClass(theme: string | undefined): string {
+    switch (theme?.toLowerCase()) {
       case 'culture générale':
-        return 'theme-general';
+        return 'general';
       case 'mathématiques':
-        return 'theme-mathématiques';
+        return 'mathématiques';
       case 'informatique':
-        return 'theme-informatique';
+        return 'informatique';
       case 'histoire':
-        return 'theme-histoire';
+        return 'histoire';
       case 'arts & culture':
-        return 'theme-arts-culture';
+        return 'arts-culture';
       case 'sport':
-        return 'theme-sport';
+        return 'sport';
       default:
-        return 'theme-default';
+        return 'default';
     }
   }
 

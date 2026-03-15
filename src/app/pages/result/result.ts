@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ScoreService } from '../../services/score.service';
 @Component({
   selector: 'app-result',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, RouterModule],
   templateUrl: './result.html',
   styleUrls: ['./result.css']
 })

@@ -9,9 +9,9 @@ export const scoreGuard: CanActivateFn = () => {
   // ✅ Vérifie si un score est enregistré
   if (scoreService.getLastScore() > 0) {
     return true; // accès autorisé
-  } else {
+   } else {
     alert('Veuillez terminer un quiz et enregistrer votre score avant de voir le classement.');
-    router.navigateByUrl('/'); // redirection vers l’accueil
+    router.navigateByUrl('/home'); // redirection vers l’accueil
     return false;
   }
 };

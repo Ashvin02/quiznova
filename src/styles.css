@@ -1,166 +1,80 @@
-:root {
-  --primary: #1976d2;
-  --secondary: #f5f5f5;
-  --text-color: #000000;
-  --accent: #ff9800;
-  --card-bg: white;
-  --input-bg: white;
-  --button-bg: var(--primary);
-  --button-text: white;
-}
+/* ============================
+   VARIABLES (option 2 → Bootstrap colors)
+   ============================ */
 
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--secondary);
-  color: var(--text-color);
-}
+   :root {
+    --bg-light: #f8f9fa;
+    --text-light: #212529;
+  }
+  
+  /* ============================
+     GLOBAL
+     ============================ */
+  
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  /* ============================
+     DARK MODE
+     ============================ */
 
-.content {
-  display: block;          /* ✅ évite les contraintes de flex */
-  width: 100%;
-  max-width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.quiz-container {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 20px;
-  overflow: visible;
-}
-
-/* ✅ Navbar */
-.navbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding: 15px 20px;
-  background-color: var(--primary);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
-}
-
-.navbar a.active {
-  border-bottom: 2px solid var(--accent);
-}
-
-.navbar button {
-  background: white;
-  color: var(--primary);
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.navbar button:hover {
-  background-color: #eee;
-  transform: scale(1.05);
-}
-
-/* ✅ Carte générique */
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin: 30px auto;
-  max-width: 700px;
-}
-
-/* Mode sombre - Home */
-.dark-theme .home-title {
-  color: #ffffff !important;
-}
-
-.dark-theme .home-subtitle {
-  color: #cccccc !important; /* gris clair pour contraste */
-}
-
-.dark-theme .input-name {
-  background-color: #2a2a2a;
-  color: #ffffff;
-  border: 1px solid #555;
-}
-
-.dark-theme .btn-start {
-  background-color: #1E88E5;
-  color: #ffffff;
-}
-
-.dark-theme .btn-start:hover {
-  background-color: #1565C0;
-}
-
-/* Mode sombre - Quiz */
-.dark-theme .question-text {
-  color: #ffffff !important;
-}
-
-.dark-theme .options button {
-  background-color: #2a2a2a;
-  color: #ffffff;
-  border: 1px solid #555555;
-}
-
-.dark-theme .options button:hover {
-  background-color: #333333;
-}
-
-.dark-theme .theme-box {
-  color: #ffffff; /* texte des thèmes lisible */
-}
-
-/* Mode sombre : on redéfinit les variables */
-.dark-theme {
-  --primary: #90caf9;       /* Bleu clair lisible */
-  --secondary: #121212;     /* Fond sombre */
-  --text-color: #c32a2a;    /* Texte très clair */
-  --accent: #ffb74d;        /* Orange doux */
-  --card-bg: #1e1e1e;       /* Fond des cartes */
-  --input-bg: #1c1c1c;      /* Fond des champs */
-  --button-bg: #2196f3;     /* Bleu bouton */
-  --button-text: #ffffff;   /* Texte bouton */
-}
-
-@media screen and (max-width: 600px) {
-  .options {
-    grid-template-columns: 1fr;
+  .theme-bg {
+    background-color: var(--bg-light);
+  }
+    
+  .dark-theme .theme-bg {
+    background-color: #121212;
+  }
+    
+  .dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  .dark-theme .navbar {
+    background-color: #1e1e1e !important;
+  }
+  
+  .dark-theme .card {
+    background-color: #1e1e1e;
+    color: white;
   }
 
-  .options button {
-    font-size: 1rem;
-    padding: 10px;
+  .dark-theme .password-rules li {
+    color: #ffffff; 
+  }  
+
+  .dark-theme .form-text {
+    color: #ffffff
   }
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.app-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
-}
+  
+  /* ============================
+     AUTH LAYOUT (Bootstrap-friendly)
+     ============================ */
+  
+  .dark-theme .auth-card {
+    background: #1e1e1e;
+    color: white;
+  }
+  
+  /* ============================
+     PASSWORD STRENGTH (Bootstrap colors)
+     ============================ */
+  
+  .password-strength {
+    height: 6px;
+    border-radius: 4px;
+    margin-top: 5px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }

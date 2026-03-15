@@ -1,0 +1,68 @@
+<div class="d-flex flex-column theme-bg">
+
+  <div class="d-flex justify-content-center align-items-center flex-grow-1 px-3 theme-bg" style= "min-height: calc(100vh - 280px)">
+
+  <div class="card shadow-lg rounded-4 border-0 p-4 d-flex flex-column justify-content-center" style=" width: 325px; min-height: 380px;">
+
+      <h3 class="text-center mb-3">Connexion</h3>
+  
+      <form [formGroup]="form" (ngSubmit)="login()" class="d-flex flex-column gap-2" >
+  
+        <!-- Email -->
+        <div class="mb-2">
+          <label>Email</label>
+          <input type="email"
+                 class="form-control"
+                 formControlName="email"
+                 placeholder="Entrez votre e-mail"
+                 [class.is-invalid]="form.get('email')?.touched && form.get('email')?.invalid && form.get('email')?.touched">
+  
+          <div class="invalid-feedback" *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']">
+            L'email est obligatoire.
+          </div>
+  
+          <div class="invalid-feedback" *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']">
+            Format d'email invalide.
+          </div>
+        </div>
+  
+        <!-- Mot de passe -->
+        <div class="mb-2">
+          <label>Mot de passe</label>
+          <input [type]="showPassword ? 'text' : 'password'"
+                 class="form-control"
+                 formControlName="password"
+                 placeholder="Entrez votre mot de passe"
+                 [class.is-invalid]="form.get('password')?.touched && form.get('password')?.invalid && form.get('password')?.touched">
+  
+          <div class="invalid-feedback" *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['required']">
+            Le mot de passe est obligatoire.
+          </div>
+        </div>
+  
+        <!-- Afficher mot de passe -->
+        <div class="form-check mb-2">
+          <input type="checkbox"
+                 class="form-check-input"
+                 id="showPassword"
+                 (change)="showPassword = !showPassword">
+          <label class="form-check-label" for="showPassword">Afficher le mot de passe</label>
+        </div>
+  
+        <!-- Message d’erreur global -->
+        <div class="alert alert-danger py-2" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+  
+        <button class="btn btn-primary w-100 mb-2">Se connecter</button>
+      </form>
+  
+      <div class="text-center mt-1">
+        <span>Pas encore de compte ?&nbsp;
+          <a routerLink="/register" class="auth-link">Inscrivez-vous</a>
+        </span>
+      </div>
+  
+    </div>
+  </div>
+</div>

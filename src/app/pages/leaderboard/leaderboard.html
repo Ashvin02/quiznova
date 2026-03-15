@@ -1,10 +1,10 @@
-<div class="leaderboard-container">
-  <h2>Classement 🏆</h2>
+<div class="container mt-4 text-center">
+  <h2 class="mb-4">Classement 🏆</h2>
 
-  <table class="leaderboard-table" *ngIf="scores.length > 0; else noScores">
-    <thead>
+  <table class="table table-bordered table-striped" *ngIf="scores.length > 0; else noScores">
+    <thead class="table-primary">
       <tr>
-        <th>Joueur</th>
+        <th>Joueur {{ playerName$ | async }} </th>
         <th>Score</th>
         <th>Date</th>
       </tr>
@@ -19,8 +19,10 @@
   </table>
 
   <ng-template #noScores>
-    <p>Aucun score enregistré pour l’instant.</p>
+    <p class="text-muted">Aucun score enregistré pour l’instant.</p>
   </ng-template>
 
-  <button routerLink="/">Retour à l'accueil</button>
+  <button class="btn btn-primary mt-3" routerLink="/home">
+    Retour à l'accueil
+  </button>
 </div>

@@ -1,37 +1,58 @@
 import { Injectable } from '@angular/core';
-import { ScoreModel } from '../models/score';
+import { BehaviorSubject } from 'rxjs';
+import { ScoreModels } from '../models/score';
 
 @Injectable({ providedIn: 'root' })
 export class ScoreService {
-  private lastScore = 0;
-  private playerName = 'Anonyme';
+
   private storageKey = 'quiznova-leaderboard';
 
-  setLastScore(score: number): void {
-    this.lastScore = score;
-  }
+  // Nom du joueur (réactif)
+  private playerNameSubject = new BehaviorSubject<string>('');
+  playerName$ = this.playerNameSubject.asObservable();
 
-  getLastScore(): number {
-    return this.lastScore;
-  }
+  // Dernier score (réactif)
+  private lastScoreSubject = new BehaviorSubject<number>(0);
+  lastScore$ = this.lastScoreSubject.asObservable();
 
+  constructor() {}
+
+  // --- PLAYER NAME ---
   setPlayerName(name: string): void {
-    this.playerName = name;
+    this.playerNameSubject.next(name);
   }
 
   getPlayerName(): string {
-    return this.playerName;
+    return this.playerNameSubject.value;
   }
 
-  addToLeaderboard(score: ScoreModel): void {
+  // --- LAST SCORE ---
+  setLastScore(score: number): void {
+    this.lastScoreSubject.next(score);
+  }
+
+  getLastScore(): number {
+    return this.lastScoreSubject.value;
+  }
+
+  // --- LEADERBOARD ---
+  addToLeaderboard(score: ScoreModels): void {
     const current = this.getLeaderboard();
     current.push(score);
     localStorage.setItem(this.storageKey, JSON.stringify(current));
   }
 
-  getLeaderboard(): ScoreModel[] {
+  getLeaderboard(): ScoreModels[] {
     const raw = localStorage.getItem(this.storageKey);
-    const list: ScoreModel[] = raw ? JSON.parse(raw) : [];
-    return list.map(s => ({ ...s, date: new Date(s.date) }));
+    const list: ScoreModels[] = raw ? JSON.parse(raw) : [];
+
+    const withDates = list.map(s => ({
+      ...s,
+      date: new Date(s.date)
+    }));
+
+    withDates.sort((a, b) => b.points - a.points);
+
+    return withDates;
   }
 }

@@ -1,0 +1,24 @@
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Liste des aliments</h2>
+  
+    <!-- Bouton charger -->
+    <div class="text-center">
+      <button class="btn btn-primary" (click)="fetchFood()">
+        Charger les aliments
+      </button>
+      <p>{{ (fact$ | async)?.fact}}</p>
+    </div>
+  
+    <!-- Liste des aliments -->
+    <h2>Liste complète</h2>
+    <button class="btn btn-primary" (click)="loadAll()">Charger tout</button>
+    <ul>
+      <li *ngFor="let f of allFoods">{{ f }}</li>
+    </ul>
+    
+    <h2>Liste un par un (1 seconde)</h2>
+    <button class="btn btn-primary" (click)="loadOneByOne()">Charger progressivement</button>
+    <ul>
+      <li *ngFor="let f of streamedFoods">{{ f }}</li>
+    </ul>
+    <div *ngIf="loadingMessage">{{ loadingMessage }}</div>

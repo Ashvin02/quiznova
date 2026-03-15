@@ -1,53 +1,18 @@
 :root {
-  --primary: #1976d2;       /* Bleu principal */
-  --secondary: #f5f5f5;     /* Fond clair */
-  --text-color: #333;       /* Texte */
-  --accent: #ff9800;        /* Accent orange */
+  --primary: #1976d2;
 }
 
-/* Corps global */
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--secondary);
-  color: var(--text-color);
+/* Mode sombre */
+.dark-theme {
+  background-color: #121212;
+  color: white;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: center;   /* ✅ centré */
-  align-items: center;
-  gap: 2rem;                 /* ✅ espace entre les liens */
-  padding: 15px 20px;
-  background-color: var(--primary); /* ✅ bleu toujours visible */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+.dark-theme .navbar {
+  background-color: #1e1e1e !important;
 }
 
-.navbar a {
-  color: white;              /* ✅ texte blanc sur fond bleu */
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
+.dark-theme .btn-outline-light {
+  border-color: #fff;
+  color: #fff;
 }
-
-.navbar a.active {
-  border-bottom: 2px solid var(--accent); /* ✅ style actif */
-}
-
-.navbar button {
-  background: white;         /* ✅ bouton visible */
-  color: var(--primary);
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.navbar button:hover {
-  background-color: #eee;
-  transform: scale(1.05);
-}
-

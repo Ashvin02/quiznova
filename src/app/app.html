@@ -1,15 +1,96 @@
-<div class="app-wrapper">
-<nav class="navbar">
-  <a routerLink="/" routerLinkActive="active">Accueil</a>
-  <a routerLink="/quiz" routerLinkActive="active">Quiz</a>
-  <a routerLink="/leaderboard" routerLinkActive="active">Classement</a>
-  <button (click)="toggleTheme()">🌙/☀️
-  </button>
+<div class="d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand" routerLink="/home">
+      <i class="bi bi-lightning-charge-fill"></i> QuizNova
+    </a>
+
+    <!-- Burger menu -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+
+      <!-- Liens de gauche -->
+      <ul class="navbar-nav me-auto">
+
+        <!-- Accueil toujours visible -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">
+            <i class="bi bi-house-door"></i> Accueil
+          </a>
+        </li>
+
+        <!-- Visible uniquement si connecté -->
+        <ng-container *ngIf="currentUser$ | async as user">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/quiz">
+              <i class="bi bi-question-circle"></i> Quiz
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/leaderboard">
+              <i class="bi bi-trophy"></i> Classement
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/food">
+              <i class="bi bi-info-circle"></i> Food
+            </a>
+          </li>
+        </ng-container>
+
+      </ul>
+
+      <!-- Liens de droite -->
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Visible uniquement si NON connecté -->
+        <ng-container *ngIf="!(currentUser$ | async); else loggedMenu">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">
+              <i class="bi bi-person-circle"></i> Login
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">
+              <i class="bi bi-person-plus"></i> Register
+            </a>
+          </li>
+        </ng-container>
+
+        <!-- Visible uniquement si connecté -->
+        <ng-template #loggedMenu>
+          <li class="nav-item d-flex align-items-center text-white me-3">
+            <i class="bi bi-person-check"></i>
+            <span class="ms-2">{{ (currentUser$ | async)?.firstName }}</span>
+          </li>
+
+          <li class="nav-item">
+            <button class="btn btn-light" (click)="logout()">
+              Déconnexion
+            </button>
+          </li>
+        </ng-template>
+
+      </ul>
+
+      <!-- Bouton thème -->
+      <button class="btn btn-outline-light ms-3" (click)="toggleTheme()">🌙/☀️</button>
+
+    </div>
+  </div>
 </nav>
 
-<main class="content">
+<main class="flex-grow-1">
   <router-outlet></router-outlet>
 </main>
 
-  <app-footer></app-footer>
-</div>
+<app-footer></app-footer>

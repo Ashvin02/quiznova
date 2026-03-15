@@ -1,6 +1,56 @@
-<div class="card home-container">
-  <h1>Bienvenue sur QuizNova 🎉</h1>
-  <p>Entrez votre nom pour commencer :</p>
-  <input [(ngModel)]="playerName" placeholder="Votre nom" class="input-name" />
-  <button (click)="startQuiz()" class="btn-start">Démarrer le quiz</button>
-</div>
+<div class="container mt-5">
+  <div class="card p-4 mx-auto text-center" style="max-width: 550px;">
+    <h1 class="mb-3 text-primary">Bienvenue sur QuizNova 🎉</h1>
+
+    <ng-container *ngIf="(currentUser$ | async) as user; else askName">
+      <p class="fs-5">Bonjour {{ user?.firstName }} {{ user?.lastName }} 👋</p>
+
+      <button class="btn btn-sm btn-primary mt-2 px-3 py-1"
+              (click)="startQuizAsUser(user?.firstName!, user?.lastName!)">
+        Démarrer le quiz
+      </button>
+    </ng-container>
+
+    <ng-template #askName>
+      <p class="fs-5 mb-3">Entrez votre nom pour commencer :</p>
+
+      <input [(ngModel)]="playerName"
+             class="form-control text-center mx-auto mb-2"
+             placeholder="Votre nom"
+             style="max-width: 260px;">
+
+      <button class="btn btn-sm btn-primary mt-2 px-2 py-1"
+              [disabled]="!playerName?.trim()"
+              (click)="startQuiz()"
+              style="font-size: 0.75rem;">
+        Démarrer le quiz
+      </button>
+    </ng-template>
+
+    <select class="form-select mt-3"
+            (change)="changeCity($event)">
+      <option value="Paris">Paris</option>
+      <option value="Lyon">Lyon</option>
+      <option value="Marseille">Marseille</option>
+      <option value="Toulouse">Toulouse</option>
+      <option value="Nice">Nice</option>
+      <option value="Strasbourg">Strasbourg</option>
+      <option value="Bordeaux">Bordeaux</option>
+      <option value="Nantes">Nantes</option>
+    </select>
+
+    <div class="mt-4" *ngIf="weather$ | async as meteo; else erreurMeteo">
+      <h5 class="text-primary">Météo actuelle : {{ meteo.name }}</h5>
+      <img [src]="'https://openweathermap.org/img/wn/' + meteo.weather[0].icon + '@2x.png'"
+           [alt]="meteo.weather[0].description"
+           width="60" height="60">
+      <p class="mb-1">{{ meteo.weather[0].description }} – {{ meteo.main.temp }}°C</p>
+      <small class="text-muted-dark">Ressenti : {{ meteo.main.feels_like }}°C · Humidité : {{ meteo.main.humidity }}%</small>
+    </div>
+    
+    <ng-template #erreurMeteo>
+      <div class="text-danger mt-3">
+        Impossible de charger la météo. Vérifiez votre connexion ou votre clé API.
+      </div>
+    </ng-template>
+    

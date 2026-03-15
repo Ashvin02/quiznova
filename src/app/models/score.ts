@@ -1,4 +1,4 @@
-export interface ScoreModel {
+export interface ScoreModels {
     player: string;
     points: number;
     date: Date;
