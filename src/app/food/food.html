@@ -6,7 +6,7 @@
       <button class="btn btn-primary" (click)="fetchFood()">
         Charger les aliments
       </button>
-      <p>{{ (fact$ | async)?.fact}}</p>
+      <p>{{ (fact$ | async)?.fact}}</p> 
     </div>
   
     <!-- Liste des aliments -->
@@ -21,4 +21,27 @@
     <ul>
       <li *ngFor="let f of streamedFoods">{{ f }}</li>
     </ul>
+    <ul>
+      <li *ngFor="let f of foods$ | async">{{ f }}</li>
+    </ul>
+
+     <h2>Liste via store</h2>
+    <input type="text" [(ngModel)]="newFood" placeholder="Nouvel aliment">
+    <button class="btn btn-success" (click)="addFood()">Ajouter</button>
+    <ul>
+      <li *ngFor="let f of foodsFromStore$ | async">{{ f }}</li>
+    </ul>
+
+    <h2>Liste via Akita</h2>
+    <button class="btn btn-success" (click)="addFoodAkita()">Ajouter</button>
+    <ul>
+      <li *ngFor="let f of foodsAkita$ | async">{{ f }}</li>
+    </ul>
+
+    <h2>Liste via NgRx</h2>
+    <button class="btn btn-success" (click)="addFoodNgRx()">Ajouter</button>
+    <ul>
+      <li *ngFor="let f of foodsNgRx$ | async">{{ f }}</li>
+    </ul>
     <div *ngIf="loadingMessage">{{ loadingMessage }}</div>
+</div>

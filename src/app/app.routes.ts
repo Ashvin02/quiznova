@@ -9,6 +9,8 @@ import { Register } from './auth/register/register';
 import { authGuard } from './auth/auth.guard';
 import { reverseAuthGuard } from './auth/auth-reverse.guard';
 import { Food } from './food/food';
+import { Child } from './child/child';
+import { Parent } from './parent/parent';
 
 
 export const routes: Routes = [
@@ -20,5 +22,7 @@ export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [reverseAuthGuard]},
   { path: 'register', component: Register, canActivate: [reverseAuthGuard]},
   { path: 'food', component: Food },
+  { path: 'child', component: Child },
+  { path: 'parent', component: Parent },
   { path: '**', redirectTo: 'login' }
 ];

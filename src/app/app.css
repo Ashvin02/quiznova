@@ -16,3 +16,8 @@
   border-color: #fff;
   color: #fff;
 }
+
+/* Animation utilisée par le spinner global */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

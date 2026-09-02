@@ -7,6 +7,8 @@ import { AuthService } from '../../auth/auth.service';
 import { User } from '../../models/user';
 import { Observable } from 'rxjs';
 import { WeatherService } from '../../services/weather';
+import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -24,12 +26,18 @@ export class Home {
     private router: Router,
     private scoreService: ScoreService,
     private auth: AuthService,
-    private weather: WeatherService
+    private weather: WeatherService,
+    private http: HttpClient,
   ) {
     this.currentUser$ = this.auth.currentUser$;
     this.weather$ = this.weather.weather$;
     this.playerName$ = this.scoreService.playerName$;
     this.loadWeather();
+  }
+
+  testSpinner() {
+    this.http.get('https://httpstat.us/200?sleep=5000') // ← URL de test pour simuler une requête HTTP
+      .subscribe();
   }
 
   startQuiz(): void {

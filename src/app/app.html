@@ -44,6 +44,17 @@
               <i class="bi bi-info-circle"></i> Food
             </a>
           </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/child">
+            <i class="bi bi-info-square"></i> Child
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/parent">
+            <i class="bi bi-info-square"></i> Parent
+          </a>
         </ng-container>
 
       </ul>
@@ -84,10 +95,14 @@
 
       <!-- Bouton thème -->
       <button class="btn btn-outline-light ms-3" (click)="toggleTheme()">🌙/☀️</button>
-
     </div>
   </div>
 </nav>
+
+<div *ngIf="spinner.loading()" class="spinner-overlay">
+  <div class="spinner"></div>
+</div>
+
 
 <main class="flex-grow-1">
   <router-outlet></router-outlet>
